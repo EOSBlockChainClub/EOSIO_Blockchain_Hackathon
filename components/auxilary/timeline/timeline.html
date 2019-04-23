@@ -1,0 +1,19 @@
+<section class="{{vm.greyBackground}}" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase timeline-font">{{vm.headText}}</h2>
+                <h3 style="text-align: center" class="section-subheading text-muted">{{vm.headNarrative}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline" >
+                    <div ng-repeat="item in vm.timelineObj">
+                        <timeline-boxes cirinv="{{item.inverted}}" cirhead="{{item.heading}}" cirimg="{{item.img}}" cirtext="{{item.text}}" cirtime="{{item.time}}"></timeline-boxes>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,25 @@
+<section class="{{vm.greyBackground}}" id="portfolio">
+    <div class="container">
+        <div class="row" ng-if="vm.headingreq">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase portfolio-font">{{vm.heading}}</h2>
+                <h3 class="section-subheading text-muted">{{vm.headingcaption}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-flex portfolio-item">
+                <a ui-sref="{{vm.linkingPage}}" class="portfolio-link" data-toggle="modal" >
+                    <div ng-if="vm.linkingreq" class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fas fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="{{vm.img}}" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>{{vm.imgcaption}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

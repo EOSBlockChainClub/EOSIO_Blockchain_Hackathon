@@ -1,0 +1,39 @@
+<section>
+    <div class="container">
+        <div style="text-align: center">
+            <input type="button" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" value="{{vm.rentVal}}" ng-click="vm.transferToken()">
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase partnership-font">House ID: {{houseId}}</h2>
+                <h2 class="section-heading text-uppercase partnership-font">Total Energy Supplied to the Grid: {{vm.tableHeaderStats.energySupplyGrid}}kWh</h2>
+                <h2 class="section-heading text-uppercase partnership-font">Total Energy Demanded from the Grid: {{vm.tableHeaderStats.energyDemandGrid}}kWh</h2>
+                <h2 class="section-heading text-uppercase partnership-font">Total Energy Supplied within the community: {{vm.tableHeaderStats.energySupplyCommunity}}kWh</h2>
+                <h2 class="section-heading text-uppercase partnership-font">Total Energy Received from the community: {{vm.tableHeaderStats.energyDemandCommunity}}kWh</h2>
+                <h2 class="section-heading text-uppercase partnership-font">Total Money Gained: ${{vm.tableHeaderStats.moneyGained}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Timestamp</th>
+                    <th scope="col">Total Tokens</th>
+                    <th scope="col">Delta Tokens</th>
+                    <th scope="col">Delta Energy</th>
+                    <th scope="col">Price Tier</th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="item in vm.tableInfo">
+                    <tr>
+                        <th scope="row">{{item.timestamp}}</th>
+                        <td>{{item.totalTokens}}</td>
+                        <td>{{item.tokensGained}}</td>
+                        <td>{{item.energyTransferred}}</td>
+                        <td>{{item.tier}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

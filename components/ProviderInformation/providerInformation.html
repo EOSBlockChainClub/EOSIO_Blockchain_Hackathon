@@ -1,0 +1,135 @@
+<section class="white">
+
+    <!--Top Bar-->
+    <!--<div class="w3-top">-->
+        <!--<div class="w3-bar w3-white w3-center w3-padding w3-opacity-min w3-hover-opacity-off">-->
+            <!--<span>-->
+                <!--<img src = "assets/pics/forest-color.png">-->
+            <!--</span>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!-- Navbar (sticky bottom) -->
+    <div class = "fixed healthcare-logo"></div>
+
+    <div class="w3-bottom w3-hide-small">
+        <div class="w3-bar w3-white w3-center w3-padding w3-opacity-min w3-hover-opacity-off" style="display:flex;">
+            <a href="#home" style="flex:1" class="w3-bar-item w3-button">Home</a>
+            <a href="#transfer" style="flex:1" class="w3-bar-item w3-button w3-hover-black">Transfer</a>
+            <a href="#log" style="flex:1" class="w3-bar-item w3-button w3-hover-black">History</a>
+        </div>
+    </div>
+
+    <div class="w3-container w3-padding-64 w3-grayscale-min" id="home">
+        <!--<div style="display:flex">-->
+            <!--<span style="flex:1">-->
+                <img align="center" src="assets/pics/Patient-Provider_Matching.png" style="width:10%;margin:10px 0;margin-left:45%;">
+            <!--</span>-->
+            <!--<div style="flex:14; float:left" class="w3-content">-->
+                <div class="w3-content">
+                    <h1 class="w3-center siemens-blue"><b>B.E.E.R</b></h1>
+                    <h4 class="w3-center siemens-blue"><b>Blockchain Enabled Energy Recommender</b></h4>
+                    <h4 class="w3-center siemens-blue"><b>A mechanism to decentralize the transfer of energy </b></h4>
+                    <br><br>
+                    <p style="padding-left:64px"><i><b>
+                        Currently, there are only a few energy providers and you’re essentially forced to pay whatever price they charge. With our recommendation system, we intend to change that. The steps involved are as follows: <br><br>
+                        1) Track the energy consumption profiles of each house in the network <br>
+                        2) Forecast the energy required by the house in the next hour for each node, and match the house with excess generation with the one in demand of energy. <br>
+                        3) Facilitate exchange of ether and energy between the matched houses. <br><br>
+
+                        With blockchain technology, the energy market of the future can be open, competitive, and two-sided. People will have more choices, be charged based on their individual requirements, and can even sell energy back to the market.
+                    </b></i></p>
+                </div>
+    </div>
+
+    <div style="display:flex" class="w3-container w3-padding-64 w3-pale-red w3-grayscale-min w3-center" id="log">
+        <div style="flex:1;">
+            <img class="w3-round-large w3-grayscale-min" src="assets/pics/27705-200.png" style="width:100%;margin:64px 0">
+        </div>
+        <div style="flex:6">
+
+            <div class="w3-content">
+                <h4 class="w3-center siemens-blue"><b> Grid Participants </b></h4>
+                <p><i><b>
+                    "I am a grid member and would like to assess my incentive performance with respect to the other houses in the grid. How is my performance?”
+                </b></i></p>
+                <p><i><b>
+                    "Energy in surplus: " {{vm.transferLog.net}} Kw/Hr
+                </b></i></p>
+            </div>
+            <table class="table-fill">
+                <thead>
+                <tr>
+                    <th class="text-left">House</th>
+                    <th class="text-left">Incentive</th>
+                </tr>
+                </thead>
+                <tbody class="table-hover" id="categoryTableContent">
+                <tr ng-repeat="houseInfo in vm.transferLog.logArray">
+                    <td>{{houseInfo.house}}
+                    </td>
+                    <td>{{houseInfo.etherReceived}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="w3-center"><button ng-click="vm.calculateEther()" class="etherBtn w3-round w3-large">Transfer Incentive</button></p>
+        </div>
+    </div>
+
+<!--    <div style="display:flex;" class="w3-container w3-padding-64 w3-pale-red w3-grayscale-min w3-center w3-wide" id="transfer">
+        <div style="flex:1;">
+            <img class="w3-round-large w3-grayscale-min" src="assets/pics/Government.png" style="width:100%;margin:64px 0">
+        </div>
+        <div style="flex:6;">
+            <div class="w3-content">
+                <h4 class="w3-center siemens-blue"><b>Consumer </b></h4>
+                <p><i><b>
+                    “I am a consumer and would like to receive energy from the recommended seller”
+                </b></i></p>
+            </div>
+            <p class="center"><i> <b>Choose a house to transfer the ether to:</b>
+                <span class="custom-dropdown">
+                    <select ng-model="vm.houseSender" >
+                        <option ng-repeat="house in vm.providerList">{{house}}</option>
+                    </select>
+                    <select ng-model="vm.houseReceiver" >
+                        <option ng-repeat="house in vm.providerList">{{house}}</option>
+                    </select>
+                </span>
+            </i></p>
+            <table class="table-fill">
+            <div ng-if="!vm.paymentMade">
+                <h1 class="txtFont">CALCULATE THE INCENTIVE TO BE TRANSFERRED</h1>
+                <p class="w3-center"><button ng-click="vm.calculateEther()" class="etherBtn w3-round w3-large">Calculate Incentive</button></p>
+                <p class="w3-center txtFont" ng-if="vm.showCalculatedEther">
+                    Total Incentive to be Transferred is {{vm.calculatedEther}} ether
+                </p>
+                <p class="w3-center"><button ng-if="vm.showCalculatedEther" ng-click="vm.transferEther()" class="etherBtn w3-round w3-large">Transfer Incentive</button></p>
+            </div>
+            <div ng-if="vm.paymentMade && !vm.paymentJustMade && !vm.paymentJustMadeComplete">
+                <br><br><br>
+                <p class="w3-center txtFont">Incentive for the current energy prediction has already been granted</p>
+            </div>
+            <div ng-if="vm.paymentJustMadeComplete">
+                <br><br><br>
+                <p class="w3-center txtFont">Incentive for the current energy prediction has been successfully granted</p>
+            </div>
+            <div ng-if="vm.paymentJustMade">
+                <br><br><br>
+                <p class="w3-center txtFont">Incentive for the current energy prediction is being processed and will be reflected in a short while</p>
+            </div>
+        </div>
+
+    </div>-->
+
+
+    <footer class="w3-center w3-black w3-padding-16">
+        <p> Powered by the awesome trio of Arjun, Milad and Zach</a></p>
+    </footer>
+    <div class="w3-hide-small" style="margin-bottom:32px"> </div>
+
+
+
+
+</section>

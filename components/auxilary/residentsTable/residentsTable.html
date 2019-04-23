@@ -1,0 +1,35 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase partnership-font">Total Energy Saved: {{vm.energySaved}}kWh</h2>
+                <h2 class="section-heading text-uppercase partnership-font">Total Money Saved: ${{vm.moneySaved}}</h2>
+                <h2 class="section-heading text-uppercase partnership-font">Current Battery Storage: {{vm.batteryStorage}}KWH</h2>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Timestamp</th>
+                    <th scope="col">Total Energy Required(KwH)</th>
+                    <th scope="col">Energy Demanded from Grid(KwH)</th>
+                    <th scope="col">Energy Supplied by Community(KwH)</th>
+                    <th scope="col">Energy Supplied by Battery(KwH)</th>
+                    <th scope="col">Money Saved</th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="item in vm.tableInfo">
+                    <tr>
+                        <th scope="row">{{item.timestamp}}</th>
+                        <td>{{item.totalEnergy}}</td>
+                        <td>{{item.energyGrid}}</td>
+                        <td>{{item.communityEnergy}}</td>
+                        <td>{{item.batteryEnergy}}</td>
+                        <td>${{item.moneySaved}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

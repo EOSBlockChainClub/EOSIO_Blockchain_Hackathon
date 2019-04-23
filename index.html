@@ -1,0 +1,105 @@
+<html ng-app = 'blockchain.components'>
+    <head>
+        <title>AAF</title>
+        <!-- Custom styles for this template -->
+        <link href="components/auxilary/splashPage/splashPage.css" rel="stylesheet">
+        <link href="components/auxilary/centerText/centerText.css" rel="stylesheet">
+        <link href="components/auxilary/timeline/timelineboxes/timelineboxes.css" rel="stylesheet">
+        <link href="components/auxilary/timeline/timeline.css" rel="stylesheet">
+        <link href="components/auxilary/centerPic/centerPic.css" rel="stylesheet">
+        <link href="components/auxilary/team/team.css" rel="stylesheet">
+        <link href="components/auxilary/team/member/member.css" rel="stylesheet">
+        <link href="components/auxilary/partnerships/partnerships.css" rel="stylesheet">
+        <link href="components/auxilary/footer/footer.css" rel="stylesheet">
+        <link href="components/auxilary/textPicDescription/textPicDescription.css" rel="stylesheet">
+        <link href="components/auxilary/imgThumbnails/imgThumbnails.css" rel="stylesheet">
+        <link href="components/auxilary/leftRightTextPic/leftRightTextPic.css" rel="stylesheet">
+        <link href="components/auxilary/devForm/devForm.css" rel="stylesheet">
+        <link href="components/auxilary/residentsInfo/residentsInfo.css" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+        <link href="resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+
+        <!-- Custom fonts for this template -->
+        <link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+
+
+        <!--<link href="resources/css/agency.css" rel="stylesheet">-->
+
+        <!--libraries to be loaded-->
+        <script src = "node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+        <script src = "node_modules/jquery/dist/jquery.js"></script>
+
+        <!--files to be loaded-->
+        <script src = "modules/blockChainComponent.js"></script>
+        <script src = "components/main/about/about.js"></script>
+        <script src = "components/main/teamPage/teamPage.js"></script>
+        <script src = "components/main/design/design.js"></script>
+        <script src = "components/main/decathlon/decathlon.js"></script>
+        <script src = "components/main/treehaus/treehaus.js"></script>
+        <script src = "components/main/residents/residents.js"></script>
+        <script src = "components/auxilary/textPicDescription/textPicDescription.js"></script>
+        <script src = "components/auxilary/centerText/centerText.js"></script>
+        <script src = "components/auxilary/timeline/timeline.js"></script>
+        <script src = "components/auxilary/centerPic/centerPic.js"></script>
+        <script src = "components/auxilary/team/team.js"></script>
+        <script src = "components/auxilary/team/member/member.js"></script>
+        <script src = "components/auxilary/partnerships/partnerships.js"></script>
+        <script src = "components/auxilary/residentsInfo/residentsInfo.js"></script>
+        <script src = "components/auxilary/residentsInfo/residentsInfo2.js"></script>
+        <script src = "components/auxilary/timeline/timelineboxes/timelineboxes.js"></script>
+        <script src = "components/ProviderInformation/providerInformation.js"></script>
+        <script src = "components/auxilary/splashPage/splashPage.js"></script>
+        <script src = "components/auxilary/devForm/devForm.js"></script>
+        <script src = "components/auxilary/footer/footer.js"></script>
+        <script src = "components/auxilary/imgThumbnails/imgThumbnails.js"></script>
+        <script src = "components/auxilary/residentsTable/residentsTable.js"></script>
+        <script src = "components/auxilary/residentsTable2/residentsTable2.js"></script>
+        <script src = "components/auxilary/residentsIndividualTable/residentsIndividualTable.js"></script>
+        <script src = "components/auxilary/opportunityZone/opportunityZone.js"></script>
+        <script src = "components/auxilary/leftRightTextPic/leftRightTextPic.js"></script>
+        <script src = "components/main/design/agroforestry/agroforestry.js"></script>
+        <script src = "components/main/design/architecture/architecture.js"></script>
+        <script src = "components/main/design/blockchain/blockchain.js"></script>
+        <script src = "components/main/design/engineering/engineering.js"></script>
+        <script src = "components/main/design/gasGoals/gasGoals.js"></script>
+        <script src = "components/main/design/locationInformation/locationInformation.js"></script>
+        <script src = "components/main/design/siteRemediation/siteRemediation.js"></script>
+        <script src = "components/main/design/targetMarket/targetMarket.js"></script>
+        <script src = "components/main/design/transportation/transportation.js"></script>
+        <script src = "components/main/contact/contact.js"></script>
+        <script src = "components/main/floorplan/floorplan.js"></script>
+        <script src = "components/main/developer/developer.js"></script>
+        <script src = "core/services/apiUtility.js"></script>
+        <script src = "core/widgets/layout_template/layout_template.js"></script>
+        <script src = "core/routes/routes.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Contact form JavaScript -->
+        <script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="resources/js/jqBootstrapValidation.js"></script>
+        <script src="resources/js/contact_me.js"></script>
+
+    </head>
+
+    <body id="page-top">
+        <!--<a ui-sref="about" ui-sref-active="active-state">About</a>-->
+        <ui-view></ui-view>
+        <!--<splash-page pagetitle="About"></splash-page>-->
+
+
+
+
+    </body>
+
+</html>

@@ -1,0 +1,31 @@
+<section class="{{vm.greyBackground}} {{className}}" id="services" style="visibility: {{sectionVisibility}}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 ng-if="vm.headingreq" class="section-heading text-uppercase service-font">{{heading}}</h2>
+                <h3 class="section-subheading text-muted" style="text-align:center">{{headingText}}</h3>
+                <!--<h3 class="section-subheading text-muted">{{vm.text}}</h3>-->
+            </div>
+            <div class="col-lg-12 text-center reduced-flex" style="flex: 0 0 70%;" ng-repeat="item in vm.queryList">
+                <label class="float-left">{{item.label}} </label>
+                <select class="section-subheading text-muted float-right {{item.selectName}}" ng-if="item.type == 'dropdown'" >
+                    <option ng-repeat="optionList in item.optionList" value="{{optionList.name}}">{{optionList.name}}</option>
+                </select>
+                <input ng-if="item.type == 'input'" type="text" class="section-subheading text-muted float-right" placeholder="{{item.placeholder}}">
+                <div ng-if="item.type == 'radio'" ng-repeat="radioItem in item.radioList" style="float:right">
+                    <input type="radio" name="item.radioName" class="section-subheading text-muted margin-left" value="radioItem.name">{{radioItem.name}}
+                </div>
+                <div ng-if="item.type == 'chkbox'" ng-repeat="checkItem in item.checkList" style="float:right">
+                    <input type="checkbox" name="item.checkName" class="section-subheading text-muted margin-left" value="checkItem.name">{{checkItem.name}}
+                </div>
+            </div>
+            <div class="col-lg-12 text-center">
+                <input type="button" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" value="Click to know more" ng-click="vm.functionCall()">
+            </div>
+        </div>
+    </div>
+</section>
+<center-pic ng-if="vm.showOpportunity" linkingreq="false" headingreq="true" heading="OPPORTUNITY ZONE" imgcaption="Map of the opportunity zone in the area entered" img="{{vm.opportunityImg}}"></center-pic>
+<center-pic ng-if="vm.showTimeline" linkingreq="false" headingreq="true" heading="FLOOR PLAN" headingcaption="Illustration of the Floor Plan" img="resources/img/floorplans/D.PNG"></center-pic>
+<timeline ng-if="vm.showTimeline" headtext="Timeline" headnarrative={{vm.timelineNarrative}} timelineobj="{{vm.timelineObjects}}" ></timeline>
+<!--<center-text ng-if="vm.showTimeline" headingreq="true" headingtext="{{vm.infoHeading}}" text="{{vm.infoText}}"></center-text>-->
