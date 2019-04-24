@@ -281,8 +281,8 @@
       <path value="$PROJECT_DIR$/backend_ui/xtra_modules/xmlhttprequest/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="456" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="455" />
     <option name="y" value="-25" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
