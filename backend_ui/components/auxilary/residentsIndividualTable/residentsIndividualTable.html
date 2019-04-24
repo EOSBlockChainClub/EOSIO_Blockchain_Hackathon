@@ -2,6 +2,12 @@
     <div class="container">
         <div style="text-align: center">
             <input type="button" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" value="{{vm.rentVal}}" ng-click="vm.transferToken()">
+            <div style="margin-top:10px">
+                <input type="button" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" value="Deposit 500 ECOT" ng-click="vm.depositTokens(500)">
+                <input type="button" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" value="Deposit 10000 ECOT" ng-click="vm.depositTokens(10000)">
+                <input type="button" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" value="Deposit 200000 ECOT" ng-click="vm.depositTokens(200000)">
+            </div>
+
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">

@@ -253,11 +253,18 @@ app.post('/payRent',function(req,res){
     transferRent(houseId,rent)
 })
 
+app.post('/deposit',function(req,res){
+    houseId = req.body.houseId
+    rent = req.body.depositAmount
+
+    deposit(houseId,rent)
+})
+
 async function readUnitData(){
     const resp = await rpc.get_table_rows({
         json: true,              // Get the response as json
-        code: 'ecosixteen',     // Contract that we target
-        scope: 'ecosixteen',         // Account that owns the data
+        code: 'ecoseventeen',     // Contract that we target
+        scope: 'ecoseventeen',         // Account that owns the data
         table: 'residents',        // Table name
         limit: 15,               // Maximum number of rows that we want to get
     })
@@ -267,8 +274,8 @@ async function readUnitData(){
 async function readAdminData(){
     const resp = await rpc.get_table_rows({
         json: true,              // Get the response as json
-        code: 'ecosixteen',     // Contract that we target
-        scope: 'ecosixteen',         // Account that owns the data
+        code: 'ecoseventeen',     // Contract that we target
+        scope: 'ecoseventeen',         // Account that owns the data
         table: 'admins',        // Table name
         limit: 15,               // Maximum number of rows that we want to get
     })
@@ -278,10 +285,10 @@ async function readAdminData(){
 async function initResidents(id,name,tokens){
     const result = await api.transact({
         actions: [{
-            account: 'ecosixteen',
+            account: 'ecoseventeen',
             name: 'initresident',
             authorization: [{
-                actor: 'ecosixteen',
+                actor: 'ecoseventeen',
                 permission: 'active',
             }],
             data: {
@@ -301,10 +308,10 @@ async function initResidents(id,name,tokens){
 async function initAdmins(id,name,tokens){
     const result = await api.transact({
         actions: [{
-            account: 'ecosixteen',
+            account: 'ecoseventeen',
             name: 'initadmin',
             authorization: [{
-                actor: 'ecosixteen',
+                actor: 'ecoseventeen',
                 permission: 'active',
             }],
             data: {
@@ -324,10 +331,10 @@ async function initAdmins(id,name,tokens){
 async function updateResidents(pv_data,sm_data){
     const result = await api.transact({
         actions: [{
-            account: 'ecosixteen',
+            account: 'ecoseventeen',
             name: 'ecologic2',
             authorization: [{
-                actor: 'ecosixteen',
+                actor: 'ecoseventeen',
                 permission: 'active',
             }],
             data: {
@@ -346,10 +353,32 @@ async function updateResidents(pv_data,sm_data){
 async function transferRent(id,amount){
     const result = await api.transact({
         actions: [{
-            account: 'ecosixteen',
+            account: 'ecoseventeen',
             name: 'payrent',
             authorization: [{
-                actor: 'ecosixteen',
+                actor: 'ecoseventeen',
+                permission: 'active',
+            }],
+            data: {
+                ID: id,
+                amount: amount
+            },
+        }],
+    }, {
+        broadcast: true,
+        sign:true,
+        blocksBehind: 3,
+        expireSeconds: 30,
+    });
+}
+
+async function deposit(id,amount){
+    const result = await api.transact({
+        actions: [{
+            account: 'ecoseventeen',
+            name: 'deposit',
+            authorization: [{
+                actor: 'ecoseventeen',
                 permission: 'active',
             }],
             data: {

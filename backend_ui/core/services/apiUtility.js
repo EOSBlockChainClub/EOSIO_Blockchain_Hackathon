@@ -5,7 +5,8 @@
             getResidentTokenInfo: getResidentTokenInfo,
             getUpdatedTokenInfo: getUpdatedTokenInfo,
             payRent: payRent,
-            getAdminInfo: getAdminInfo
+            getAdminInfo: getAdminInfo,
+            deposit: deposit
         };
 
         function getResidentTokenInfo(startingMonth){
@@ -52,6 +53,22 @@
             let url = 'http://ec2-52-90-35-35.compute-1.amazonaws.com:8000/payRent';
             // let url = 'http://www.treeha.us/getAllResidentsInfo';
             payload = {houseId: id, rentAmount: rentAmount}
+
+            return $http({
+                method: 'POST',
+                url: url,
+                data: payload,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        }
+
+        function deposit(id,depositAmount){
+            // let url = 'http://localhost:8000/payRent';
+            let url = 'http://ec2-52-90-35-35.compute-1.amazonaws.com:8000/deposit';
+            // let url = 'http://www.treeha.us/getAllResidentsInfo';
+            payload = {houseId: id, depositAmount: depositAmount}
 
             return $http({
                 method: 'POST',

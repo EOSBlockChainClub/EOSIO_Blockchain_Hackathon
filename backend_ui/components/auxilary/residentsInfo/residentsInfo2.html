@@ -27,7 +27,7 @@
             </div>
         </div>
         <canvas ng-if="vm.showGraph" id="myChart"></canvas>
-        <residents-individual-table rent-val="{{vm.houseRent}}" house-id="{{vm.houseIdResident}}" table-info="{{vm.individualTableInfo}}" ng-if="vm.showGraph"></residents-individual-table>
+        <residents-individual-table house-tokens="{{vm.houseTokens}}" rent-val="{{vm.houseRent}}" house-id="{{vm.houseIdResident}}" table-info="{{vm.individualTableInfo}}" ng-if="vm.showGraph"></residents-individual-table>
         <residents-table-two grey-background="true" table-info="{{vm.tableInfo}}"></residents-table-two>
 
         <!--<canvas id="myChart"></canvas>-->

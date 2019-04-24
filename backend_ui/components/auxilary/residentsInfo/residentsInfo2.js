@@ -54,7 +54,7 @@
         function tokenInfoText(tokenInformation){
             return{
                 id: "Unit Id: " + tokenInformation.houseId,
-                tokens: "Tokens Available: " + tokenInformation.houseTokens
+                tokens: "ECOT Tokens Available: " + tokenInformation.houseTokens
             }
         }
 
@@ -76,7 +76,7 @@
         }
 
         function getAdminInfoSuccess(response){
-            vm.adminTokens = response.data.adminTokens
+            vm.adminTokens = "ECOT Tokens:" + response.data.adminTokens
         }
 
         function getUpdatedResidentInfoSuccess(response){
@@ -141,7 +141,7 @@
         function sumArrMoney(arrayToSum){
             sumVal = 0
             arrayToSum.forEach(function(item){
-                sumVal += Math.ceil((parseFloat(item.deltaTokens) * 0.01)*100)/100
+                sumVal += Math.ceil((parseFloat(item.deltaTokens))*100)
             })
 
             return Math.ceil(sumVal*100)/100;;
@@ -165,39 +165,42 @@
                 $interval.cancel(updateIndividualTableInfo);
             }
 
-            try{
-                vm.showGraph = true;
-                $timeout(function(){
-                    var incidentCount = {
-                        label: 'Total Money Made(in $) by ' + houseId + ' at each timestamp',
-                        borderColor: 'blue',
-                        data: getTimelineData(houseId)
-                    };
 
-                    var ctx = $('#myChart')[0].getContext('2d');
-                    // if(vm.chartRef){
-                    //     delete (vm.chartRef.ctx)
-                    // }
+                try{
+                    vm.showGraph = true;
+                    $timeout(function(){
+                        var incidentCount = {
+                            label: 'Total Money Made(in $) by ' + houseId + ' at each timestamp',
+                            borderColor: 'blue',
+                            data: getTimelineData(houseId)
+                        };
 
-                    var chart = new Chart(ctx, {
-                        type: 'line',
-                        data: { datasets: [incidentCount] },
-                        options: {
-                            scales: {
-                                xAxes: [{
-                                    type: 'time'
-                                }]
+                        var ctx = $('#myChart')[0].getContext('2d');
+                        // if(vm.chartRef){
+                        //     delete (vm.chartRef.ctx)
+                        // }
+
+                        var chart = new Chart(ctx, {
+                            type: 'line',
+                            data: { datasets: [incidentCount] },
+                            options: {
+                                scales: {
+                                    xAxes: [{
+                                        type: 'time'
+                                    }]
+                                }
                             }
-                        }
-                    });
-                    // vm.chartRef = chart
-                },1000)
-            } catch (error){
-                console.log(error)
-            }
+                        });
+                        // vm.chartRef = chart
+                    },1000)
+                } catch (error){
+                    console.log(error)
+                }
 
-            vm.houseIdResident = houseId.replace('Unit Id:','')
-            vm.houseRent = vm.houseRents[houseId]
+                vm.houseIdResident = houseId.replace('Unit Id:','')
+                vm.houseRent = vm.houseRents[houseId]
+                vm.houseTokens = vm.containerSections[0].houseInfo[parseInt(vm.houseIdResident)-1].tokens.replace("ECOT Tokens Available: ","")
+
             updateIndividualTableInfo = $interval(function(){
                 vm.individualTableInfo = getTimelineDataModified(houseId)
             },3000)

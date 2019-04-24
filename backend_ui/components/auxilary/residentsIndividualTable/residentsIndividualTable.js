@@ -10,7 +10,8 @@
             scope: {
                 tableInfo: '@',
                 houseId:'@',
-                rentVal:'@'
+                rentVal:'@',
+                houseTokens:'@'
             }
         };
     }
@@ -20,6 +21,7 @@
         vm.energySupplied = 0
         vm.moneyGained= 0
         vm.transferToken = transferToken
+        vm.depositTokens = depositTokens
 
         $scope.$watch('tableInfo', function(newValue, oldValue) {
             if(newValue===oldValue) return;
@@ -29,6 +31,10 @@
 
         $scope.$watch('rentVal', function(newValue, oldValue) {
             vm.rentVal = 'Pay your rent of $' + $scope.rentVal
+        })
+
+        $scope.$watch('houseTokens', function(newValue, oldValue) {
+            vm.houseTokens = newValue;
         })
 
         function getTotalEnergySupplied(tableInfo){
@@ -60,13 +66,29 @@
 
 
         function transferToken(){
-            apiUtility.payRent($scope.houseId,$scope.rentVal*100).then(payRentSuccess,payRentFailure);
+            if(parseInt($scope.rentVal) > parseInt($scope.houseTokens)){
+                alert('Insufficient Funds')
+            }else{
+                apiUtility.payRent($scope.houseId,$scope.rentVal*100).then(payRentSuccess,payRentFailure);
+            }
+
         }
 
         function payRentSuccess(response){
             alert("Rent paid successfully")
         }
         function payRentFailure(response){
+            alert("Failure")
+        }
+
+        function depositTokens(amount){
+            apiUtility.deposit($scope.houseId,amount).then(depositTokensSuccess(),depositTokensFailure);
+        }
+
+        function depositTokensSuccess(response){
+            alert("Tokens deposited successfully")
+        }
+        function depositTokensFailure(response){
             alert("Failure")
         }
 
