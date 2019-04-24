@@ -2,10 +2,6 @@
 var express = require("express");
 var path = require('path');
 var request = require('request');
-var bodyParser = require('body-parser');
-var csv = require('csv-parser');
-var fs = require('fs');
-// var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
 var app = express();
 

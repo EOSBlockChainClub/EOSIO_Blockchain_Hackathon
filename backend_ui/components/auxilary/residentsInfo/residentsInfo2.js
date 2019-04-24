@@ -118,7 +118,7 @@
                 return (item.tier == 'B2' || item.tier == 'B1 & B2')
             }))
             tableRecord.energyTransferredGrid = sumArr(tableTokenInfo.filter(function(item){
-                return (item.tier == 'S2' || item.tier == 'B1 & B2')
+                return (item.tier == 'S2' || item.tier == 'S1 & S2')
             }))
             tableRecord.moneySaved = sumArrMoney(tableTokenInfo.filter(function(item){
                 return (item.tier == 'S2' || item.tier == 'S1'|| item.tier == 'S1 & S2')

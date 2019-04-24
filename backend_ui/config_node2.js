@@ -5,7 +5,6 @@ var request = require('request');
 var bodyParser = require('body-parser');
 var csv = require('csv-parser');
 var fs = require('fs');
-// var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
 const { Api, JsonRpc, RpcError } = require('eosjs');
 const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig');      // development only
@@ -234,7 +233,7 @@ app.get('/getUpdatedTokenInfo',function(req,res){
     res.send(res_body)
 })
 
-app.get('/getAdminInfo',function(req,res)){
+app.get('/getAdminInfo',function(req,res){
     readAdminData().then((response)=>{
         adminToken = response[0].tokens
     })
@@ -245,9 +244,9 @@ app.get('/getAdminInfo',function(req,res)){
     }
 
     res.send(res_body)
-}
+})
 
-app.post('/transferRent',function(req,res){
+app.post('/payRent',function(req,res){
     houseId = req.body.houseId
     rent = req.body.rentAmount
 
@@ -257,8 +256,8 @@ app.post('/transferRent',function(req,res){
 async function readUnitData(){
     const resp = await rpc.get_table_rows({
         json: true,              // Get the response as json
-        code: 'eco15',     // Contract that we target
-        scope: 'eco15',         // Account that owns the data
+        code: 'ecosixteen',     // Contract that we target
+        scope: 'ecosixteen',         // Account that owns the data
         table: 'residents',        // Table name
         limit: 15,               // Maximum number of rows that we want to get
     })
@@ -268,8 +267,8 @@ async function readUnitData(){
 async function readAdminData(){
     const resp = await rpc.get_table_rows({
         json: true,              // Get the response as json
-        code: 'eco15',     // Contract that we target
-        scope: 'eco15',         // Account that owns the data
+        code: 'ecosixteen',     // Contract that we target
+        scope: 'ecosixteen',         // Account that owns the data
         table: 'admins',        // Table name
         limit: 15,               // Maximum number of rows that we want to get
     })
@@ -279,10 +278,10 @@ async function readAdminData(){
 async function initResidents(id,name,tokens){
     const result = await api.transact({
         actions: [{
-            account: 'eco15',
+            account: 'ecosixteen',
             name: 'initresident',
             authorization: [{
-                actor: 'eco15',
+                actor: 'ecosixteen',
                 permission: 'active',
             }],
             data: {
@@ -302,16 +301,16 @@ async function initResidents(id,name,tokens){
 async function initAdmins(id,name,tokens){
     const result = await api.transact({
         actions: [{
-            account: 'eco15',
+            account: 'ecosixteen',
             name: 'initadmin',
             authorization: [{
-                actor: 'eco15',
+                actor: 'ecosixteen',
                 permission: 'active',
             }],
             data: {
                 ID: id,
                 Name: name,
-                token_c: tokens,
+                tokens: tokens,
             },
         }],
     }, {
@@ -325,10 +324,10 @@ async function initAdmins(id,name,tokens){
 async function updateResidents(pv_data,sm_data){
     const result = await api.transact({
         actions: [{
-            account: 'eco15',
+            account: 'ecosixteen',
             name: 'ecologic2',
             authorization: [{
-                actor: 'eco15',
+                actor: 'ecosixteen',
                 permission: 'active',
             }],
             data: {
@@ -347,10 +346,10 @@ async function updateResidents(pv_data,sm_data){
 async function transferRent(id,amount){
     const result = await api.transact({
         actions: [{
-            account: 'eco15',
+            account: 'ecosixteen',
             name: 'payrent',
             authorization: [{
-                actor: 'eco15',
+                actor: 'ecosixteen',
                 permission: 'active',
             }],
             data: {

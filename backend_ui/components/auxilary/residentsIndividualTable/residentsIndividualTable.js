@@ -32,52 +32,42 @@
         })
 
         function getTotalEnergySupplied(tableInfo){
-            let totalEnergySupplyGrid = 0
-            let totalEnergySupplyCommunity = 0
-            let totalEnergyDemandGrid = 0
-            let totalEnergyDemandCommunity = 0
+            let totalEnergySupply = 0
+            let totalEnergyDemanded = 0
             let totalMoneyGained = 0
             tableInfo.forEach(function(item){
                 switch(item.tier){
                     case 'S1':
-                        totalEnergySupplyCommunity += item.energyTransferred
-                        totalMoneyGained += (item.tokensGained * 0.01)
-                        break;
                     case 'S2':
-                        totalEnergySupplyGrid += item.energyTransferred
+                    case 'S1 & S2':
+                        totalEnergySupply += item.energyTransferred
                         totalMoneyGained += (item.tokensGained * 0.01)
                         break;
                     case 'B1':
-                        totalEnergyDemandCommunity -= item.energyTransferred
-                        break;
                     case 'B2':
-                        totalEnergyDemandGrid -= item.energyTransferred
-                        break;
-                    case 'S1 & S2':
-                        totalEnergySupplyCommunity += item.energyTransferred/2
-                        totalEnergySupplyGrid += item.energyTransferred/2
-                        totalMoneyGained += (item.tokensGained * 0.01)
-                        break;
                     case 'B1 & B2':
-                        totalEnergyDemandCommunity -= item.energyTransferred/2
-                        totalEnergyDemandGrid -= item.energyTransferred/2
+                        totalEnergyDemanded -= item.energyTransferred
                         break;
-
                 }
             })
 
             return {
-                energySupplyGrid: Math.ceil((totalEnergySupplyGrid * 100))/100,
-                energySupplyCommunity: Math.ceil((totalEnergySupplyCommunity * 100))/100,
-                energyDemandGrid: Math.ceil((totalEnergyDemandGrid * 100))/100,
-                energyDemandCommunity: Math.ceil((totalEnergyDemandCommunity * 100))/100,
+                energySupply: Math.ceil((totalEnergySupply * 100))/100,
+                energyDemanded: Math.ceil((totalEnergyDemanded * 100))/100,
                 moneyGained: Math.ceil((totalMoneyGained * 100))/100
             }
         }
 
 
         function transferToken(){
-            apiUtility.payRent($scope.houseId,$scope.rentVal);
+            apiUtility.payRent($scope.houseId,$scope.rentVal*100).then(payRentSuccess,payRentFailure);
+        }
+
+        function payRentSuccess(response){
+            alert("Rent paid successfully")
+        }
+        function payRentFailure(response){
+            alert("Failure")
         }
 
     }
