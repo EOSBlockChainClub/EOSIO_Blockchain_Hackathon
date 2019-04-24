@@ -152,6 +152,10 @@
                     "type": "name"
                 },
                 {
+                    "name": "size",
+                    "type": "int32"
+                },
+                {
                     "name": "tokens",
                     "type": "int32"
                 },
@@ -182,10 +186,6 @@
                 {
                     "name": "PV_share",
                     "type": "float64"
-                },
-                {
-                    "name": "size",
-                    "type": "int32"
                 }
             ]
         }

@@ -66,9 +66,9 @@ public:
                 row.size = size;
 
             });
-            print("Success in adding Unit");
+            print("Success in adding Unit", name{Name}, "\n");
         } else {
-            print("Resident record exists");
+            print("Resident record exists\n");
         }
     }
 
@@ -89,9 +89,9 @@ public:
                 row.delta = 0;
 
             });
-            print("Success in adding ", name{Name});
+            print("Success in adding ", name{Name}, "\n");
         } else {
-            print(name{Name}," record already exists");
+            print(name{Name}," record already exists\n");
         }
     }
 
@@ -125,7 +125,7 @@ public:
             residents.modify(iterator, get_self(), [&](auto &row) {               
                 row.tokens += amount;                            
             });
-            print(int{amount}," ECO tokens successfully deposited to resident ", int{ID});
+            print(int{amount}," ECO tokens successfully deposited to resident ", int{ID}, "\n");
         }
     }
 
@@ -145,13 +145,13 @@ public:
             } else {          
                 residents.modify(iterator, get_self(), [&](auto &row) {               
                     row.tokens -= amount;               
-                    print(int{amount}," ECO tokens used to pay rent by resident ", int{ID});
+                    print(int{amount}," ECO tokens used to pay rent by resident ", int{ID},"\n");
                 });
                 admins.modify(iteratora, get_self(), [&](auto &row) {               
                     row.tokens += amount;               
                 });
                 /** add transfer token **/
-                print(int{amount}," ECO tokens paid to ", name{"ecologic"_n} , " as rent by resident ", int{ID});
+                print(int{amount}," ECO tokens paid to ", name{"ecologic"_n} , " as rent by resident ", int{ID},"\n");
             }                      
         }
     }
@@ -182,16 +182,16 @@ public:
         int tr = 0;
         int ts = 0;
         smd = create_data_struct(pv, sm_data, smd, D, tr, ts); //smd is the output data structure
-        print("breakpoint_4");
+        
         int ID = 0;
         for (int i = 0; i < 12; i++) {
             ID = i+1;
-            print("breakpoint_5_",i);
+            //print("breakpoint_5_",i);
             print("1",ID, smd[i].SM_state);
             print("2", smd[i].token_c, smd[i].PV_state);
             print("3", smd[i].delta, smd[i].tier);
             update_resident_data(ID, smd[i].token_c, smd[i].SM_state, smd[i].PV_state, smd[i].delta, smd[i].tier);
-            print("resident", int{ID}, "updated");
+            print("resident", int{ID}, "updated\n");
         }
         update_admin("ecologic"_n, ts, tr, D);
     }
@@ -199,11 +199,11 @@ public:
 /* private struct and functions*/
     private:
     void update_resident_data(int ID, int token_c, double sm, double pv, double delta, string tier) { /** token_c will be the original allocation when initializing the resident **/
-        print("breakpoint_6a");
+        
         resident_index residents(get_self(), get_first_receiver().value);
-        print("breakpoint_6b");
+        
         auto iterator = residents.find(ID);
-        print("breakpoint_6c");
+        
         if (iterator == residents.end()) { /** to create a new resident record**/
             print("\n resident does not exist, create resident or correct input \n");
         } else {
@@ -217,7 +217,7 @@ public:
                 row.tier = tier;
                 
             });
-            print("Resident data updated successfully");
+            print("Resident data updated successfully\n");
         }
         
     }
@@ -257,10 +257,10 @@ public:
         for (int i = 0; i < nr; i++) {
             smd[i].ID = i + 1;
             smd[i].SM_state = sm_data[i];
-            PV_allocate = pv_split[i];
+            PV_allocate = pv_split[i]*pv;
             smd[i].PV_state = PV_allocate;
             smd[i].delta = smd[i].PV_state - smd[i].SM_state;
-            print("resident ID ", int{smd[i].ID}, " has net of: ", double{smd[i].delta});
+            print("resident ID ", int{smd[i].ID}, " has net of: ", double{smd[i].delta} ,"\n");
 
             //Determine how many data points have nn, nz and np
 
@@ -279,9 +279,9 @@ public:
             over_net = over_net + smd[i].delta;
         }
         over_delta = over_net;
-        print("tot net production is: ", double{nprod}, " and number of net producers is: ", int{np});
-        print("tot net demand is: ", double{ndem}, " and number of net consumers is: ", int{nn});
-        print("Overall net is: ", double{over_net});
+        print("tot net production is: ", double{nprod}, " and number of net producers is: ", int{np} ,"\n");
+        print("tot net demand is: ", double{ndem}, " and number of net consumers is: ", int{nn} ,"\n");
+        print("Overall net is: ", double{over_net} ,"\n");
 
         Res_state smp[np], smc[nn]; //array of net positve and net negative (consumers) resident data
         Res_state smd_sort[nr];
@@ -290,7 +290,7 @@ public:
             smd_sort[i] = smd[i];
         }
 
-        print("breakpoint1_sorted");
+        print("deltas sorted" ,"\n");
         if (round(over_net) != 0) {
             //sort struct based on deltas
             std::sort(smd_sort, smd_sort + nr, comparedelta);
@@ -299,13 +299,13 @@ public:
             for (int i = 0; i < np; i++) {
                 smp[i] = smd_sort[i];
             }
-            print("highest producer is resident ID ", int{smp[0].ID});
+            print("HIGHEST producer is resident ID ", int{smp[0].ID} ,"\n");
             //NET CONSUMER ARRAY
             for (int i = nr - nn; i < nr; i++) {
                 smc[i - (np + nz)] = smd_sort[i];
             }
 
-            print("breakpoint_2");
+            
             //if (round(over_net)>0){
             // FOR NET CONSUMERS
             double track_bought = 0;  //variable to track how much energy has been bought from neighbors
@@ -327,7 +327,7 @@ public:
                         smd[smc[i].ID - 1].tier = "B1 & B2";
                     }
                     
-                    print("resident " , int{smc[i].ID}, " paid ", int{energy_cost}, " for ", double{cons_n}, " and ",  double{cons_grid}," at tier ", smd[smc[i].ID - 1].tier);
+                    print("resident " , int{smc[i].ID}, " paid ", int{energy_cost}, " for ", double{cons_n}, " and ",  double{cons_grid}," at tier ", smd[smc[i].ID - 1].tier ,"\n");
                     i++;
                     for (; i < nn; i++) {
                         int energy_cost = round(smc[i].delta * P3) * -1;
@@ -335,7 +335,7 @@ public:
                         smd[smc[i].ID - 1].token_c = energy_cost*-1;
                         smd[smc[i].ID - 1].tier = "B2";
                         tokr += energy_cost;
-                        print("resident ", int{smc[i].ID}," paid ",int{energy_cost}," for ", double{smc[i].delta}, " at tier ", smd[smc[i].ID - 1].tier);
+                        print("resident ", int{smc[i].ID}," paid ",int{energy_cost}," for ", double{smc[i].delta}, " at tier ", smd[smc[i].ID - 1].tier ,"\n");
                     }
                 } else {
                     int energy_cost =
@@ -344,12 +344,12 @@ public:
                     smd[smc[i].ID - 1].token_c = energy_cost*-1;
                     smd[smc[i].ID - 1].tier = "B1";
                     tokr += energy_cost;
-                    print("resident ", int{smc[i].ID} ," paid ", int{energy_cost}," for ", double{smc[i].delta}, " at tier ", smd[smc[i].ID - 1].tier);
+                    print("resident ", int{smc[i].ID} ," paid ", int{energy_cost}," for ", double{smc[i].delta}, " at tier ", smd[smc[i].ID - 1].tier ,"\n");
                 }
             }
             // FOR NET PRODUCERS
             double track_sold = 0; //variable to track how much energy has been sold to neighbors
-            print("breakpoint_3");
+            
             for (int i = 0; i < np; i++) { //loop to pay tokens to net producers
                 track_sold += smp[i].delta;
 
@@ -366,7 +366,7 @@ public:
                     smp[i].token_c = energy_profit;
                     smd[smp[i].ID - 1].token_c = energy_profit;
                     toks += energy_profit;
-                    print("resident ", int{smp[i].ID}," got paid ",int{energy_profit}, " for ", double{prod_n}, " and ", double{prod_grid}, " at tier ", smd[smp[i].ID - 1].tier);
+                    print("resident ", int{smp[i].ID}," got paid ",int{energy_profit}, " for ", double{prod_n}, " and ", double{prod_grid}, " at tier ", smd[smp[i].ID - 1].tier ,"\n");
                     i++;
                     for (; i < np; i++) { //pay the other producers at tier 2 price
                         int energy_profit = round(smp[i].delta * P2);
@@ -374,7 +374,7 @@ public:
                         smd[smp[i].ID - 1].token_c = energy_profit;
                         toks += energy_profit;
                         smd[smp[i].ID - 1].tier = "S2";
-                        print("resident ", int{smp[i].ID}, " got paid ", int{energy_profit}, " for ",  double{smp[i].delta}, " at tier", smd[smp[i].ID - 1].tier);
+                        print("resident ", int{smp[i].ID}, " got paid ", int{energy_profit}, " for ",  double{smp[i].delta}, " at tier", smd[smp[i].ID - 1].tier ,"\n");
                     }
                 } else {
                     int energy_profit = round(smp[i].delta * P1); //pay peak producers at tier 1 price
@@ -382,19 +382,19 @@ public:
                     smd[smp[i].ID - 1].token_c = energy_profit;
                     toks += energy_profit;
                     smd[smp[i].ID - 1].tier = "S1";
-                    print("resident ", int{smp[i].ID}," got paid ", int{energy_profit}, " for ", double{smp[i].delta}," at tier ", smd[smp[i].ID - 1].tier);
+                    print("resident ", int{smp[i].ID}," got paid ", int{energy_profit}, " for ", double{smp[i].delta}," at tier ", smd[smp[i].ID - 1].tier ,"\n");
                 }
             }
-            print("breakpoint_7");
+            
             //}
         } else {
             //add code to return number of tokens returned equal to zero
             for (int i = 0; i < nr; i++) {
                 smd[i].token_c = 0;
             }
-            print("We are net zero at this time");
+            print("We are net zero at this time" ,"\n");
         }
-        print("breakpoint_8");
+        
         return smd;
     }
 
@@ -402,6 +402,7 @@ public:
     struct [[eosio::table]] resident {
         int ID;
         name Name; //should be same as account name on blockchain
+        int size; //number of bedrooms
         int tokens; //total number of tokens (initialize at the same value for all residents 10000ECO or $100 )
         double SM_state; //current smart meter reading
         double PV_state; //current share of PV production (for this it is all shared equally)
@@ -410,7 +411,7 @@ public:
         std::string tier; //price tier, one of the following: S1, S2, B1, B2
         std::string last_update; //time of last update
         double PV_share; //fraction of PV alocated at each time stamp
-        int size; //number of bedrooms
+        
 
         uint64_t primary_key() const { return ID; }
         
