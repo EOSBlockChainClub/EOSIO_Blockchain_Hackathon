@@ -1,0 +1,248 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.1",
+    "types": [],
+    "structs": [
+        {
+            "name": "admin",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "int32"
+                },
+                {
+                    "name": "Name",
+                    "type": "name"
+                },
+                {
+                    "name": "tokens",
+                    "type": "int32"
+                },
+                {
+                    "name": "token_sent",
+                    "type": "int32"
+                },
+                {
+                    "name": "token_received",
+                    "type": "int32"
+                },
+                {
+                    "name": "tot_token_r",
+                    "type": "int32"
+                },
+                {
+                    "name": "tot_token_s",
+                    "type": "int32"
+                },
+                {
+                    "name": "delta",
+                    "type": "float64"
+                }
+            ]
+        },
+        {
+            "name": "deposit",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "int32"
+                },
+                {
+                    "name": "amount",
+                    "type": "int32"
+                }
+            ]
+        },
+        {
+            "name": "ecologic2",
+            "base": "",
+            "fields": [
+                {
+                    "name": "pv",
+                    "type": "float64"
+                },
+                {
+                    "name": "sm_data",
+                    "type": "float64[]"
+                }
+            ]
+        },
+        {
+            "name": "eraseadmin",
+            "base": "",
+            "fields": [
+                {
+                    "name": "Name",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "eraseres",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "int32"
+                }
+            ]
+        },
+        {
+            "name": "initadmin",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "int32"
+                },
+                {
+                    "name": "Name",
+                    "type": "name"
+                },
+                {
+                    "name": "tokens",
+                    "type": "int32"
+                }
+            ]
+        },
+        {
+            "name": "initresident",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "int32"
+                },
+                {
+                    "name": "Name",
+                    "type": "name"
+                },
+                {
+                    "name": "token_c",
+                    "type": "int32"
+                }
+            ]
+        },
+        {
+            "name": "payrent",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "int32"
+                },
+                {
+                    "name": "amount",
+                    "type": "int32"
+                }
+            ]
+        },
+        {
+            "name": "resident",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "int32"
+                },
+                {
+                    "name": "Name",
+                    "type": "name"
+                },
+                {
+                    "name": "tokens",
+                    "type": "int32"
+                },
+                {
+                    "name": "SM_state",
+                    "type": "float64"
+                },
+                {
+                    "name": "PV_state",
+                    "type": "float64"
+                },
+                {
+                    "name": "delta",
+                    "type": "float64"
+                },
+                {
+                    "name": "token_change",
+                    "type": "int32"
+                },
+                {
+                    "name": "tier",
+                    "type": "string"
+                },
+                {
+                    "name": "last_update",
+                    "type": "string"
+                },
+                {
+                    "name": "PV_share",
+                    "type": "float64"
+                },
+                {
+                    "name": "size",
+                    "type": "int32"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "deposit",
+            "type": "deposit",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "ecologic2",
+            "type": "ecologic2",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "eraseadmin",
+            "type": "eraseadmin",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "eraseres",
+            "type": "eraseres",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "initadmin",
+            "type": "initadmin",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "initresident",
+            "type": "initresident",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "payrent",
+            "type": "payrent",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "admins",
+            "type": "admin",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "residents",
+            "type": "resident",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": []
+}
